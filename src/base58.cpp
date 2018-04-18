@@ -226,11 +226,11 @@ int CBase58Data::CompareTo(const CBase58Data& b58) const {
 }
 
 namespace {
-    class CFriendshipCoincoinAddressVisitor : public boost::static_visitor<bool> {
+    class CMinnsCoincoinAddressVisitor : public boost::static_visitor<bool> {
     private:
-        CFriendshipCoincoinAddress *addr;
+        CMinnsCoincoinAddress *addr;
     public:
-        CFriendshipCoincoinAddressVisitor(CFriendshipCoincoinAddress *addrIn) : addr(addrIn) { }
+        CMinnsCoincoinAddressVisitor(CMinnsCoincoinAddress *addrIn) : addr(addrIn) { }
 
         bool operator()(const CKeyID &id) const { return addr->Set(id); }
         bool operator()(const CScriptID &id) const { return addr->Set(id); }
@@ -250,28 +250,28 @@ namespace {
     };
 };
 
-bool CFriendshipCoincoinAddress::Set(const CKeyID &id) {
+bool CMinnsCoincoinAddress::Set(const CKeyID &id) {
     SetData(Params().Base58Prefix(CChainParams::PUBKEY_ADDRESS), &id, 20);
     return true;
 }
 
-bool CFriendshipCoincoinAddress::Set(const CScriptID &id) {
+bool CMinnsCoincoinAddress::Set(const CScriptID &id) {
     SetData(Params().Base58Prefix(CChainParams::SCRIPT_ADDRESS), &id, 20);
     return true;
 }
 
-bool CFriendshipCoincoinAddress::Set(const CTxDestination &dest) {
-    return boost::apply_visitor(CFriendshipCoincoinAddressVisitor(this), dest);
+bool CMinnsCoincoinAddress::Set(const CTxDestination &dest) {
+    return boost::apply_visitor(CMinnsCoincoinAddressVisitor(this), dest);
 }
 
-bool CFriendshipCoincoinAddress::IsValid() const {
+bool CMinnsCoincoinAddress::IsValid() const {
     bool fCorrectSize = vchData.size() == 20;
     bool fKnownVersion = vchVersion == Params().Base58Prefix(CChainParams::PUBKEY_ADDRESS) ||
                          vchVersion == Params().Base58Prefix(CChainParams::SCRIPT_ADDRESS);
     return fCorrectSize && fKnownVersion;
 }
 
-CTxDestination CFriendshipCoincoinAddress::Get() const {
+CTxDestination CMinnsCoincoinAddress::Get() const {
     if (!IsValid())
         return CNoDestination();
     uint160 id;
@@ -284,7 +284,7 @@ CTxDestination CFriendshipCoincoinAddress::Get() const {
         return CNoDestination();
 }
 
-bool CFriendshipCoincoinAddress::GetKeyID(CKeyID &keyID) const {
+bool CMinnsCoincoinAddress::GetKeyID(CKeyID &keyID) const {
     if (!IsValid() || vchVersion != Params().Base58Prefix(CChainParams::PUBKEY_ADDRESS))
         return false;
     uint160 id;
@@ -293,34 +293,34 @@ bool CFriendshipCoincoinAddress::GetKeyID(CKeyID &keyID) const {
     return true;
 }
 
-bool CFriendshipCoincoinAddress::IsScript() const {
+bool CMinnsCoincoinAddress::IsScript() const {
     return IsValid() && vchVersion == Params().Base58Prefix(CChainParams::SCRIPT_ADDRESS);
 }
 
-void CFriendshipCoincoinSecret::SetKey(const CKey& vchSecret) {
+void CMinnsCoincoinSecret::SetKey(const CKey& vchSecret) {
     assert(vchSecret.IsValid());
     SetData(Params().Base58Prefix(CChainParams::SECRET_KEY), vchSecret.begin(), vchSecret.size());
     if (vchSecret.IsCompressed())
         vchData.push_back(1);
 }
 
-CKey CFriendshipCoincoinSecret::GetKey() {
+CKey CMinnsCoincoinSecret::GetKey() {
     CKey ret;
     ret.Set(&vchData[0], &vchData[32], vchData.size() > 32 && vchData[32] == 1);
     return ret;
 }
 
-bool CFriendshipCoincoinSecret::IsValid() const {
+bool CMinnsCoincoinSecret::IsValid() const {
     bool fExpectedFormat = vchData.size() == 32 || (vchData.size() == 33 && vchData[32] == 1);
     bool fCorrectVersion = vchVersion == Params().Base58Prefix(CChainParams::SECRET_KEY);
     return fExpectedFormat && fCorrectVersion;
 }
 
-bool CFriendshipCoincoinSecret::SetString(const char* pszSecret) {
+bool CMinnsCoincoinSecret::SetString(const char* pszSecret) {
     return CBase58Data::SetString(pszSecret) && IsValid();
 }
 
-bool CFriendshipCoincoinSecret::SetString(const std::string& strSecret) {
+bool CMinnsCoincoinSecret::SetString(const std::string& strSecret) {
     return SetString(strSecret.c_str());
 }
 

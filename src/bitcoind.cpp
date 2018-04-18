@@ -52,12 +52,12 @@ bool AppInit(int argc, char* argv[])
         if (mapArgs.count("-?") || mapArgs.count("--help"))
         {
             // First part of help message is specific to bitcoind / RPC client
-            std::string strUsage = _("FriendshipCoin version") + " " + FormatFullVersion() + "\n\n" +
+            std::string strUsage = _("MinnsCoin version") + " " + FormatFullVersion() + "\n\n" +
                 _("Usage:") + "\n" +
-                  "  friendshipcoind [options]                     " + "\n" +
-                  "  friendshipcoind [options] <command> [params]  " + _("Send command to -server or friendshipcoind") + "\n" +
-                  "  friendshipcoind [options] help                " + _("List commands") + "\n" +
-                  "  friendshipcoind [options] help <command>      " + _("Get help for a command") + "\n";
+                  "  minnscoind [options]                     " + "\n" +
+                  "  minnscoind [options] <command> [params]  " + _("Send command to -server or minnscoind") + "\n" +
+                  "  minnscoind [options] help                " + _("List commands") + "\n" +
+                  "  minnscoind [options] help <command>      " + _("Get help for a command") + "\n";
 
             strUsage += "\n" + HelpMessage();
 

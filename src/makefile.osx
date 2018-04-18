@@ -3,7 +3,7 @@
 # Distributed under the MIT/X11 software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-# Mac OS X makefile for friendshipcoin
+# Mac OS X makefile for minnscoin
 # Originally by Laszlo Hanyecz (solar@heliacal.net)
 
 PLATFORM=x86_64-apple-darwin
@@ -29,7 +29,7 @@ USE_LOWMEM:=0
 LIBS= -dead_strip
 
 ifdef STATIC
-# Build STATIC if you are redistributing the friendshipcoind binary
+# Build STATIC if you are redistributing the minnscoind binary
 LIBS += \
  $(DEPSDIR)/lib/libdb_cxx-4.8.a \
  $(DEPSDIR)/lib/libboost_system-mt.a \
@@ -152,13 +152,13 @@ ifeq (${USE_LOWMEM}, 1)
     DEFS += -DLOWMEM
 endif
 
-all: friendshipcoind
+all: minnscoind
 
 # build secp256k1
 DEFS += $(addprefix -I,$(CURDIR)/secp256k1/include)
 secp256k1/src/libsecp256k1_la-secp256k1.o:
 	@echo "Building Secp256k1 ..."; cd secp256k1; chmod 755 *; ./autogen.sh; ./configure --enable-module-recovery --host=x86_64-apple-darwin16.7.0; make; cd ..;
-friendshipcoind: secp256k1/src/libsecp256k1_la-secp256k1.o
+minnscoind: secp256k1/src/libsecp256k1_la-secp256k1.o
 
 # build leveldb
 LIBS += $(CURDIR)/leveldb/libleveldb.a $(CURDIR)/leveldb/libmemenv.a
@@ -186,11 +186,11 @@ obj/%.o: %.c
 	      -e '/^$$/ d' -e 's/$$/ :/' < $(@:%.o=%.d) >> $(@:%.o=%.P); \
 	  rm -f $(@:%.o=%.d)
 
-friendshipcoind: $(OBJS:obj/%=obj/%)
+minnscoind: $(OBJS:obj/%=obj/%)
 	$(CXX) $(CFLAGS) -o $@ $(LIBPATHS) $^ $(LIBS)
 
 clean:
-	-rm -f friendshipcoind
+	-rm -f minnscoind
 	-rm -f obj/*.o
 	-rm -f obj/*.P
 	-rm -f obj/build.h

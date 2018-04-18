@@ -130,9 +130,9 @@ ifeq (${USE_WALLET}, 1)
         obj/walletdb.o
 endif
 
-all: friendshipcoind.exe
+all: minnscoind.exe
 
-friendshipcoind.exe: secp256k1/src/libsecp256k1_la-secp256k1.o
+minnscoind.exe: secp256k1/src/libsecp256k1_la-secp256k1.o
 
 LIBS += $(CURDIR)/leveldb/libleveldb.a $(CURDIR)/leveldb/libmemenv.a
 DEFS += -I"$(CURDIR)/leveldb/include"
@@ -148,12 +148,12 @@ obj/%.o: %.cpp $(HEADERS)
 obj/%.o: %.c $(HEADERS)
 	$(CC) -c $(CFLAGS) -o $@ $<
 
-friendshipcoind.exe: $(OBJS:obj/%=obj/%)
+minnscoind.exe: $(OBJS:obj/%=obj/%)
 	$(CXX) $(CFLAGS) $(LDFLAGS) -o $@ $(LIBPATHS) $^ $(LIBS) -lshlwapi
 
 clean:
 	-rm -f obj/*.o
-	-rm -f friendshipcoind.exe
+	-rm -f minnscoind.exe
 	-rm -f obj/build.h
 	cd leveldb && TARGET_OS=OS_WINDOWS_CROSSCOMPILE $(MAKE) clean && cd ..
 

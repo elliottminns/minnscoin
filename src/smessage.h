@@ -166,7 +166,7 @@ public:
 
 
 // -- get at the data
-class CFriendshipCoincoinAddress_B : public CFriendshipCoincoinAddress
+class CMinnsCoincoinAddress_B : public CMinnsCoincoinAddress
 {
 public:
     uint8_t getVersion()

@@ -57,16 +57,16 @@ public:
         // The message start string is designed to be unlikely to occur in normal data.
         // The characters are rarely used upper ASCII, not valid as UTF-8, and produce
         // a large 4-byte int at any alignment.
-        pchMessageStart[0] = 0x11;
-        pchMessageStart[1] = 0xc3;
-        pchMessageStart[2] = 0xb1;
-        pchMessageStart[3] = 0xde;
+        pchMessageStart[0] = 0x4d;
+        pchMessageStart[1] = 0x69;
+        pchMessageStart[2] = 0x6e;
+        pchMessageStart[3] = 0x6e;
         vAlertPubKey = ParseHex("0323740193a8560083f057e3bf354ce8b5739d4242cd9992d1fb95ebe9d0c626cd");
-        nDefaultPort = 58008;
-        nRPCPort = 58009;
+        nDefaultPort = 85008;
+        nRPCPort = 85009;
         bnProofOfWorkLimit = CBigNum(~uint256(0) >> 20);
 
-        const char* pszTimestamp = "It's time to get friendly!";
+        const char* pszTimestamp = "The Guardian 17/04/2018 Cryptocurrency: New York launches inquiry, saying people lack 'basic facts'";
 
         std::vector<CTxIn> vin;
         vin.resize(1);
@@ -74,38 +74,38 @@ public:
         std::vector<CTxOut> vout;
         vout.resize(1);
         vout[0].SetEmpty();
-        CTransaction txNew(1, 1517569200, vin, vout, 0);
+        CTransaction txNew(1, 1524005790, vin, vout, 0);
 
         genesis.vtx.push_back(txNew);
         genesis.hashPrevBlock = 0;
         genesis.hashMerkleRoot = genesis.BuildMerkleTree();
         genesis.nVersion = 1;
-        genesis.nTime    = 1519845939;
+        genesis.nTime    = 1524005790;
         genesis.nBits    = 0x1e0fffff;
-        genesis.nNonce   = 587523;
+        genesis.nNonce   = 1391167;
 
         hashGenesisBlock = genesis.GetHash();
 
-        assert(hashGenesisBlock == uint256("0x000001b5480fd285a0d85a6cdbd79e59e95ca9d4d5666eb08511063a4d43aa4d"));
-        assert(genesis.hashMerkleRoot == uint256("0x73493cadda0b9042bae383208bccc06c47c46892ba8feea5d831d358eb1626d4"));
+        assert(hashGenesisBlock == uint256("0000048b3477141bf17d02e589c6b589e1be3e2e41e40dac77ceff68ada57b43"));
+        assert(genesis.hashMerkleRoot == uint256("206f0d0d4eae41e5b3d0efad1538cf2a266c92b8a12a1336f75b0ed888fabed8"));
 
-        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,95);
-        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,35);
+        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,50);
+        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,110);
         base58Prefixes[SECRET_KEY] =     std::vector<unsigned char>(1,153);
         base58Prefixes[STEALTH_ADDRESS] = std::vector<unsigned char>(1,75);
-        base58Prefixes[EXT_PUBLIC_KEY] = list_of(0x04)(0x88)(0xB2)(0x1E).convert_to_container<std::vector<unsigned char> >();
-        base58Prefixes[EXT_SECRET_KEY] = list_of(0x04)(0x88)(0xAD)(0xE4).convert_to_container<std::vector<unsigned char> >();
+        base58Prefixes[EXT_PUBLIC_KEY] = list_of(0x14)(0x88)(0xB2)(0x1E).convert_to_container<std::vector<unsigned char> >();
+        base58Prefixes[EXT_SECRET_KEY] = list_of(0x14)(0x88)(0xAD)(0xE4).convert_to_container<std::vector<unsigned char> >();
 
-        vSeeds.push_back(CDNSSeedData("0","54.172.62.103"));
-        vSeeds.push_back(CDNSSeedData("1","node.friendshipcoin.com"));
+        //vSeeds.push_back(CDNSSeedData("0","54.172.62.103"));
+        //vSeeds.push_back(CDNSSeedData("1","node.minnscoin.com"));
 
         convertSeeds(vFixedSeeds, pnSeed, ARRAYLEN(pnSeed), nDefaultPort);
 
         nPoolMaxTransactions = 3;
         strDarksendPoolDummyAddress = "f25gtaAQYBUNjYrxzZqNdyADSmwPPpWoLC";
-        nLastPOWBlock = 20000;
+        nLastPOWBlock = 1;
         nPOSStartBlock = 1;
-        nMasternodePaymentStartBlock = 50;
+        nMasternodePaymentStartBlock = 500000000;
     }
 
     virtual const CBlock& GenesisBlock() const { return genesis; }
