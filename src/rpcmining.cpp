@@ -546,8 +546,6 @@ Value getblocktemplate(const Array& params, bool fHelp)
         throw JSONRPCError(RPC_CLIENT_NOT_CONNECTED, "MinnsCoin is not connected!");
 
 
-    printf("Hey hey hey");
-
     if (IsInitialBlockDownload())
         throw JSONRPCError(RPC_CLIENT_IN_INITIAL_DOWNLOAD, "MinnsCoin is downloading blocks...");
 
@@ -576,6 +574,7 @@ Value getblocktemplate(const Array& params, bool fHelp)
             delete pblock;
             pblock = NULL;
         }
+
         pblock = CreateNewBlock(*pMiningKey);
         if (!pblock)
             throw JSONRPCError(RPC_OUT_OF_MEMORY, "Out of memory");

@@ -1446,12 +1446,7 @@ bool CheckProofOfWork(uint256 hash, unsigned int nBits)
 
 bool IsInitialBlockDownload()
 {
-    printf("here\n");
     LOCK(cs_main);
-    printf("unlock\n");
-    printf("%d\n", pindexBest->nHeight);
-    printf("%d\n", nBestHeight);
-    printf("%d\n", Checkpoints::GetTotalBlocksEstimate());
     if (pindexBest == NULL || nBestHeight < Checkpoints::GetTotalBlocksEstimate())
         return true;
     static int64_t nLastUpdate;
@@ -1461,7 +1456,6 @@ bool IsInitialBlockDownload()
         pindexLastBest = pindexBest;
         nLastUpdate = GetTime();
     }
-    printf("here 2\n");
     return (GetTime() - nLastUpdate < 15 &&
             pindexBest->GetBlockTime() < GetTime() - 8 * 60 * 60);
 }
