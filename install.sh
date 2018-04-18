@@ -1,7 +1,7 @@
 TMP_FOLDER=$(mktemp -d)
-CONFIG_FILE="friendshipcoin.conf"
-BINARY_FILE="/usr/local/bin/friendshipcoind"
-REPO="https://github.com/friendshipCoin/friendshipcoin-core.git"
+CONFIG_FILE="minnscoin.conf"
+BINARY_FILE="/usr/local/bin/minnscoind"
+REPO="https://github.com/elliottminns/minnscoin.git"
 apt-get update -y
 apt-get install vim git build-essential libtool autotools-dev automake pkg-config libssl-dev libevent-dev bsdmainutils software-properties-common libgmp3-dev  -y
 apt-get install libboost-all-dev -y
@@ -12,8 +12,8 @@ apt-get install libminiupnpc-dev -y
 export EXIP=`wget -qO- eth0.me`
 apt-get install -y pwgen
 export RPC_PASSWORD=`pwgen -1 20 -n`
-mkdir $HOME/.friendshipcoin
-printf "rpcuser=user\nrpcpassword=$RPC_PASSWORD\nrpcport=58009\ndaemon=1\nlisten=1\nserver=1\nmaxconnections=256\nrpcallowip=127.0.0.1\nexternalip=$EXIP:58008\n" > $HOME/.friendshipcoin/$CONFIG_FILE
+mkdir $HOME/.minnscoin
+printf "rpcuser=user\nrpcpassword=$RPC_PASSWORD\nrpcport=58009\ndaemon=1\nlisten=1\nserver=1\nmaxconnections=256\nrpcallowip=127.0.0.1\nexternalip=$EXIP:58008\n" > $HOME/.minnscoin/$CONFIG_FILE
 git clone $REPO $TMP_FOLDER
 cd $TMP_FOLDER/src/secp256k1
 chmod +x autogen.sh
@@ -24,5 +24,5 @@ cd ..
 mkdir obj/support
 mkdir obj/crypto
 make -f makefile.unix
-cp -a friendshipcoind $BINARY_FILE
+cp -a minnscoind $BINARY_FILE
 clear
