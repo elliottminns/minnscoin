@@ -25,4 +25,3 @@ mkdir obj/support
 mkdir obj/crypto
 make -f makefile.unix
 cp -a minnscoind $BINARY_FILE
-clear

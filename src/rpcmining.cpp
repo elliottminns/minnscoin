@@ -163,6 +163,7 @@ Value checkkernel(const Array& params, bool fHelp)
     if (vNodes.empty())
         throw JSONRPCError(-9, "MinnsCoin is not connected!");
 
+    printf("hello world\n");
     if (IsInitialBlockDownload())
         throw JSONRPCError(-10, "MinnsCoin is downloading blocks...");
 
@@ -543,6 +544,9 @@ Value getblocktemplate(const Array& params, bool fHelp)
 
     if (vNodes.empty())
         throw JSONRPCError(RPC_CLIENT_NOT_CONNECTED, "MinnsCoin is not connected!");
+
+
+    printf("Hey hey hey");
 
     if (IsInitialBlockDownload())
         throw JSONRPCError(RPC_CLIENT_IN_INITIAL_DOWNLOAD, "MinnsCoin is downloading blocks...");
