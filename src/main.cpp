@@ -50,7 +50,7 @@ CBigNum bnProofOfStakeLimit(~uint256(0) >> 20);
 unsigned int nStakeMinAge = 8 * 60 * 60; // 8 hours
 unsigned int nModifierInterval = 8 * 60; // time to elapse before new modifier is computed
 
-int nCoinbaseMaturity = 50;
+int nCoinbaseMaturity = 100;
 CBlockIndex* pindexGenesisBlock = NULL;
 int nBestHeight = -1;
 
@@ -1358,7 +1358,7 @@ int64_t GetProofOfWorkReward(int nHeight, int64_t nFees)
     int64_t nSubsidy = 0;
 
     if (nHeight == 1) {
-        nSubsidy = 1000000 * COIN;
+        nSubsidy = 571e6 * COIN;
     }
 
     return nSubsidy + nFees;
@@ -2494,7 +2494,7 @@ bool CBlock::CheckBlock(bool fCheckPOW, bool fCheckMerkleRoot, bool fCheckSig) c
     bool MasternodePayments = false;
     bool fIsInitialDownload = IsInitialBlockDownload();
 
-    if(nTime > START_MASTERNODE_PAYMENTS) MasternodePayments = true;
+    // if(nTime > START_MASTERNODE_PAYMENTS) MasternodePayments = true;
     if (!fIsInitialDownload)
     {
         if(MasternodePayments)

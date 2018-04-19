@@ -671,7 +671,6 @@ Value submitblock(const Array& params, bool fHelp)
             "Attempts to submit new block to network.\n"
             "See https://en.bitcoin.it/wiki/BIP_0022 for full specification.");
 
-    printf("%s \n", params[0].get_str().c_str());
     vector<unsigned char> blockData(ParseHex(params[0].get_str()));
     CDataStream ssBlock(blockData, SER_NETWORK, PROTOCOL_VERSION);
     CBlock block;
@@ -681,8 +680,6 @@ Value submitblock(const Array& params, bool fHelp)
     catch (std::exception &e) {
         throw JSONRPCError(RPC_DESERIALIZATION_ERROR, "Block decode failed");
     }
-
-    printf("%s\n", block.ToString().c_str());
 
     bool fAccepted = ProcessBlock(NULL, &block);
     if (!fAccepted)
