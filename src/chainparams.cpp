@@ -62,8 +62,8 @@ public:
         pchMessageStart[2] = 0x6e;
         pchMessageStart[3] = 0x6e;
         vAlertPubKey = ParseHex("0323740193a8560083f057e3bf354ce8b5739d4242cd9992d1fb95ebe9d0c626cd");
-        nDefaultPort = 85008;
-        nRPCPort = 85009;
+        nDefaultPort = 48008;
+        nRPCPort = 48009;
         bnProofOfWorkLimit = CBigNum(~uint256(0) >> 20);
 
         const char* pszTimestamp = "The Guardian 17/04/2018 Cryptocurrency: New York launches inquiry, saying people lack 'basic facts'";
